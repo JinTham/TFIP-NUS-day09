@@ -12,9 +12,9 @@ public class GuessServer {
         }
         System.out.printf("Starting server on port %d\n",port);
         ServerSocket server = new ServerSocket(port);
+        System.out.println("Waiting for incoming connection");
         while (true){
             //Wait for a connection
-            System.out.println("Waiting for incoming connection");
             Socket sConn = server.accept();
             System.out.println("Got a connection");
             //Start threading

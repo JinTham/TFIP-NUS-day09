@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class TicTacToe {
     public void printBoard(String[] board){
         System.out.println("|---|---|---|");
@@ -10,6 +12,7 @@ public class TicTacToe {
     }
     public String checkWinner(String[] board){
         String line = "";
+        String winner = "";
         int i = 0;
         while (i<8){
             switch(i){
@@ -31,7 +34,22 @@ public class TicTacToe {
                     break;
             }
             i ++;
+            if (line.equalsIgnoreCase("XXX")){
+                winner = "X";
+                i = 9;
+            } else if (line.equalsIgnoreCase("OOO")){
+                winner = "O";
+                i = 9;
+            } else {
+                for (int j=0;j<9;j++){
+                    if (Arrays.asList(board).contains(String.valueOf(j+1))){
+                        break;
+                    } else if (j==8){
+                        winner = "draw";
+                    }
+                }
+            }
         }
-        return "";
+        return winner;
     }
 }

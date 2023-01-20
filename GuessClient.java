@@ -46,7 +46,7 @@ public class GuessClient {
             //Receive reply from server
             String reply = dis.readUTF();
             System.out.printf(">>>Reply from server: %s",reply);
-            if (reply.equals("You got it right!")){
+            if (reply.equals("You got it right!\n")){
                 stop = true;
             }
         }

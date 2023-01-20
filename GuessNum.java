@@ -16,7 +16,7 @@ public class GuessNum implements Runnable{
     @Override
     public void run() {
         try (//Output and input stream
-        OutputStream os = this.sConn.getOutputStream()) {
+            OutputStream os = this.sConn.getOutputStream()) {
             DataOutputStream dos = new DataOutputStream(os);
             InputStream is = this.sConn.getInputStream();
             DataInputStream dis = new DataInputStream(is);
@@ -26,19 +26,19 @@ public class GuessNum implements Runnable{
             String clientGuess = "0";
             String reply;
             System.out.println(Thread.currentThread().getName()+" game start. The answer is "+guessNum);
-            while (clientGuess != String.valueOf(guessNum)){
+            while (!clientGuess.equals(String.valueOf(guessNum))){
                 clientGuess = dis.readUTF();
                 if (clientGuess.equals("exit")){
                     System.out.println("Client give up");
                     break;
                 }
-                System.out.printf("%s Client guess %s",Thread.currentThread().getName(),clientGuess);
+                System.out.printf("%s Client guess %s\n",Thread.currentThread().getName(),clientGuess);
                 if (Integer.parseInt(clientGuess) < guessNum){
-                    reply = "Go higher!";
+                    reply = "Go higher!\n";
                 } else if (Integer.parseInt(clientGuess) > guessNum){
-                    reply = "Go lower!";
+                    reply = "Go lower!\n";
                 } else {
-                    reply = "You got it right!";
+                    reply = "You got it right!\n";
                 }
                 dos.writeUTF(reply);
                 dos.flush();
@@ -50,6 +50,5 @@ public class GuessNum implements Runnable{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.exit(0);
     }
 }
